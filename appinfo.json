@@ -1,0 +1,10 @@
+{
+  "id": "com.chillaxwebos.app",
+  "version": "0.0.1",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "Chillax",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png"
+}
