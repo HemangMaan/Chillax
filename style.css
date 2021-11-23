@@ -4,11 +4,13 @@
     box-sizing: border-box;
 }
 :root{
-    --primary-color:#22254b;
-    --secondary-color: #373b69;
+    --primary-color:#000000;
+    --secondary-color: #d01c64;
+    --complimentary-color: #971348;
 }
 body{
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
+    background-image: url(Assets/Movie-theater-Dark1.jpg);
     font-family: 'Poppins', sans-serif;
     margin: 0;
 }
@@ -20,7 +22,7 @@ header{
 }
 .search{
     background-color: transparent;
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--complimentary-color);
     padding:0.5rem 1rem;
     border-radius: 50px;
     font-size: 1rem;
@@ -33,7 +35,7 @@ header{
 }
 
 .search::placeholder{
-    color: #7378c5;
+    color: #fff;
 }
 main{
     display:flex;
@@ -44,7 +46,7 @@ main{
 .movie {
     width: 300px;
     margin: 1rem;
-    border-radius: 3px;
+    border-radius: 10px;
     box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
     background-color: var(--secondary-color);
     position:relative;
@@ -69,7 +71,7 @@ main{
 }
 
 .movie-info span{
-    background-color: var(--primary-color);
+    background-color: var(--complimentary-color);
     padding: 0.25rem 0.5rem;
     border-radius: 3px;
     font-weight: bold;
@@ -91,6 +93,8 @@ main{
     left:0;
     right:0;
     bottom:0;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
     background-color: #fff;
     padding: 1rem;
     max-height: 100%;
