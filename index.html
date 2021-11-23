@@ -3,27 +3,6 @@
 
 <head>
 	<title>Chillax</title>
-	<style type="text/css">
-		body {
-			width: 100%;
-			height: 100%;
-			background-color: #202020;
-		}
-
-		div {
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			display: table;
-		}
-
-		h1 {
-			display: table-cell;
-			vertical-align: middle;
-			color: #FFFFFF;
-		}
-
-	</style>
 </head>
 
 <script src="webOSTVjs-1.2.4/webOSTV.js" charset="utf-8"></script>
@@ -40,12 +19,36 @@
 			console.log("Failed to getTime");
 		}
 	});
-</script>
+ </script>
 
-<body>
-	<div>
-		<h1>Hello, World!</h1>
-	</div>
+ <body>
+	 <header>
+		 <form id="form">
+			 <input type="text" placeholder="search" id="search" class="search">
+		 </form>
+		 </header>
+		 <div id="tags">
+			 <div class="tag">Action</div>
+			 <div class="tag">Adventure</div>
+			 <div class="tag">Drama</div>
+			 <div class="tag">Comedy</div>
+		 </div>
+		 <main id="main">
+			 <div class="movie">
+				 <img src="#" alt="to be continued">
+				 <div class="move-info">
+					 <h3>Movie title</h3>
+					 <span class="green">9.8</span>
+				 </div>
+				 <div class="overview">
+					 <h3>Overview</h3>
+					 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					  Earum assumenda dolorum veniam possimus modi laborum nesciunt
+					   sapiente ratione eveniet fuga illo, facere placeat.
+				 </div>
+			 </div>
+		 </main>
+	 </header>
 </body>
 
-</html>
+</html> 
