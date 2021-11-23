@@ -1,1 +1,1 @@
-var a
+const API_KEY;
