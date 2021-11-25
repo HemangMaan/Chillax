@@ -10,7 +10,7 @@ body{
 }
 
 
-header{
+header{ 
     padding:1rem;
     display:flex;
     justify-content: flex-end;
@@ -245,7 +245,9 @@ main{
       right: 35px;
     }
   }
-
+#results{
+    font: 10px;
+}
 
   .embed.hide{
       display: none;
