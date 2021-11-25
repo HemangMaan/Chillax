@@ -122,9 +122,12 @@ main{
     margin:5px;
     display:inline-block;
     cursor: pointer;
+    border: 1px solid;
+  padding: 10px;
+  box-shadow: 2px ​5px 13px rgb(64, 157, 194);
 }
 
-@media(min-width:100px) and (max-width:500px){
+/* @media(min-width:100px) and (max-width:500px){
     .tag{
         font-size : 30px;
         background-color: orange;
@@ -136,7 +139,7 @@ main{
         font-size : 50px;
         background-color: rgb(178, 47, 218);
     }
-}
+} */
 .Mainlogo{
     border-radius: 30%;
     height: 48px;
