@@ -386,3 +386,22 @@ function pageCall(page){
     getMovies(url);
   }
 }
+
+document.addEventListener("keydown", function(inEvent){
+  var message = "<h1>" + "Keycode is" + inEvent.keyCode + "</h1>"+ "</br>";
+  document.getElementById("results").innerHTML = message;
+  if (inEvent.keyCode == 40) { 
+    window.scrollBy({ 
+      top: 200, // negative value acceptable
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+  if (inEvent.keyCode == 38) { 
+    window.scrollBy({ 
+      top: -200, // negative value acceptable
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+});
