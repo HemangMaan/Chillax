@@ -6,23 +6,14 @@
 	<link rel="stylesheet" href="css/style.css">
 	<title>Chillax</title>
 	<link rel="icon" href="Assets/logo.png">
+    <!-- Database files -->
+    <link rel="stylesheet" type="text/css" href="css/db8.css">
+    <script type="text/javascript" charset="utf-8" src="javascripts/db8.js"></script>
+    <!-- Database files -->
 </head>
 
 <script src="webOSTVjs-1.2.4/webOSTV.js" charset="utf-8"></script>
 <script src="webOSTVjs-1.2.4/webOSTV-dev.js" charset="utf-8"></script>
-<!-- <script type="text/javascript">
-	//sample code for calling LS2 API
-	webOS.service.request("luna://com.palm.systemservice", {
-		method: "clock/getTime",
-		parameters: {},
-		onSuccess: function (args) {
-			console.log("UTC:", args.utc);
-		},
-		onFailure: function (args) {
-			console.log("Failed to getTime");
-		}
-	});
- </script> -->
 
  <body>
 	<header>
@@ -33,9 +24,38 @@
             <input type="text" placeholder="Search" id="search" class="search">
         </form>
     </header>
+    
+    <!-- DataBase test -->
+
+    <div> 
+		<h1 id="testResultPutKind">Creating Kind</h1>
+		<button type="button" onclick="onPutKind()">Create(putKind)</button>
+		</br>
+
+		<h1 id="testResultPut">Result of put action</h1>
+		<button type="button" onclick="onPut()">put items(put)</button>
+		</br>
+		<div id="idOfItems"></div>
+		</br>
+		<h1 id="testResultFind">Result of Find action</h1>
+		<button type="button" onclick="onFind()">Find items By Kind(find)</button>
+		</br>
+		<div id="itemPanel"></div>
+		</br>
+		<h1 id="testResultDelKind">Deleting Kind</h1>
+		<button type="button" onclick="onDelKind()">Delete Kind(delKind)</button>
+	</div>
+
+    <!-- DataBase test -->
+
+    <!-- Getting key number of remote -->
+    
     <!-- <div style="color: aliceblue;" id="results">
-		<h1>Press a Key</h1>
+        <h1>Press a Key</h1>
 	</div> -->
+    
+    <!-- Getting key number of remote -->
+    
     <div id="tags" tabindex="-1"></div>
     <div id="myNav" class="overlay">
 
