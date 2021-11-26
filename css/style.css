@@ -133,6 +133,23 @@ main{
     margin:5px;
     display:inline-block;
     cursor: pointer;
+    border: 1px solid;
+  padding: 10px;
+  box-shadow: 2px ​5px 13px rgb(64, 157, 194);
+}
+
+@media(min-width:100px) and (max-width:500px){
+    .tag{
+        font-size : 30px;
+        background-color: orange;
+    }
+}
+
+@media(min-width:501px) and (max-width:1000px){
+    .tag{
+        font-size : 50px;
+        background-color: rgb(178, 47, 218);
+    }
 }
 .Mainlogo{
     border-radius: 30%;
@@ -243,7 +260,9 @@ main{
       right: 35px;
     }
   }
-
+#results{
+    font: 10px;
+}
 
   .embed.hide{
       display: none;
