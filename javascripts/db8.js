@@ -1,5 +1,5 @@
 function onPutKind() {
-	var request = webOS.service.request("luna://com.palm.db", {
+	var request = webOS.service.request("luna://com.webos.service.db", {
 		method: "putKind",
 		parameters: {
 			"id":"com.chillaxwebos.app:1",
@@ -48,19 +48,19 @@ function onPut() {
 		method: "put",
 		parameters: {
 			"objects":[{
-				"_kind":"test.db-api:1",
+				"_kind":"com.chillaxwebos.app:1",
 				"prop_name1":"foo1",
 				"prop_name2":"bar1"
 			},{
-				"_kind":"test.db-api:1",
+				"_kind":"com.chillaxwebos.app:1",
 				"prop_name1":"foo2",
 				"prop_name2":"bar2"
 			},{
-				"_kind":"test.db-api:1",
+				"_kind":"com.chillaxwebos.app:1",
 				"prop_name1":"foo3",
 				"prop_name2":"bar3"
 			},{
-				"_kind":"test.db-api:1",
+				"_kind":"com.chillaxwebos.app:1",
 				"prop_name1":"foo4",
 				"prop_name2":"bar4"
 			}]
@@ -100,7 +100,7 @@ function onFind() {
 		method: "find",
 		parameters: {
 			"query":{
-				"from":"test.db-api:1"
+				"from":"com.chillaxwebos.app:1"
 			}
 		},
 		onComplete: getFindResponse
@@ -141,7 +141,7 @@ function onDelKind() {
 	var request = webOS.service.request("luna://com.webos.service.db", {
 		method: "delKind",
 		parameters: {
-			"id" : "test.db-api:1"
+			"id" : "com.chillaxwebos.app:1"
 		},
 		onComplete: getDelKindResponse
 	});
