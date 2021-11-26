@@ -1,17 +1,22 @@
 :root{
-    --primary-color:#22254b;
-    --secondary-color: #373b69;
+    --primary-color:#000000;
+    --secondary-color: #d01c64;
 }
 
 body{
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
+    background-image: url("../Assets/background.jpg");
+    /* background-image: radial-gradient(grey, Black); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     font-family: 'Poppins', sans-serif;
     margin: 0;
 }
 
 
 header{
-    padding:1rem;
+    padding:2rem;
     display:flex;
     justify-content: flex-end;
     background-color: var(--secondary-color);
@@ -22,7 +27,7 @@ header{
     border: 2px solid var(--primary-color);
     padding:0.5rem 1rem;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 2rem;
     color:#fff;
     font-family: inherit;
 }
@@ -33,7 +38,7 @@ header{
 }
 
 .search::placeholder{
-    color: #7378c5;
+    color: #ffffff;
 }
 
 main{
@@ -43,9 +48,9 @@ main{
 }
 
 .movie {
-    width: 300px;
+    width: 400px;
     margin: 1rem;
-    border-radius: 3px;
+    border-radius: 10px;
     box-shadow: 0.2px 4px 5px rgba(0,0,0,0.1);
     background-color: var(--secondary-color);
     position:relative;
@@ -60,6 +65,7 @@ main{
 .movie-info{
     color:#eee;
     display: flex;
+    font-size: 1.5rem;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem 1rem;
@@ -67,7 +73,7 @@ main{
 }
 
 .movie-info h3{
-    margin-top: 0;
+    margin-top: 2rem;
 }
 
 .movie-info span{
@@ -95,6 +101,9 @@ main{
     right:0;
     bottom:0;
     background-color: #fff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 1.5rem;
     padding: 1rem;
     max-height: 100%;
     transform:translateY(101%);
@@ -112,12 +121,14 @@ main{
     justify-content: center;
     align-items: center;
     margin: 10px auto;
+    scroll-behavior: smooth;
 }
 
 .tag{
     color:white;
+    font-size: 1.5rem;
     padding:10px 20px;
-    background-color: rgb(178, 47, 218);
+    background-color: rgb(208,28,100);
     border-radius: 50px;
     margin:5px;
     display:inline-block;
@@ -125,9 +136,9 @@ main{
 }
 .Mainlogo{
     border-radius: 30%;
-    height: 48px;
+    height: 60px;
     float: left;
-    margin-left: 0px;
+    margin-right: 10px;
 }
 .tags:hover{
     border-color: orange;
@@ -150,6 +161,7 @@ main{
 
 .page{
     padding:20px;
+    font-size: 2rem;
     cursor:pointer;
 }
 
@@ -162,14 +174,14 @@ main{
     padding: 10px 20px;
     border-radius: 50%;
     border: 5px solid orange;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 600;
 }
 
 .know-more{
     background-color: orange;
     color:white;
-    font-size: 16px;
+    font-size: 1.5rem;
     font-weight: bold;
     border:0;
     border-radius: 50px;

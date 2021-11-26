@@ -249,8 +249,7 @@ function openNav(movie) {
           if(site == 'YouTube'){
               
             embed.push(`
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/${key}" title="${name}" class="embed hide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          
+              <iframe width="1280" height="720" src="https://www.youtube.com/embed/${key}" title="${name}" class="embed hide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           `)
 
             dots.push(`
@@ -388,20 +387,42 @@ function pageCall(page){
 }
 
 document.addEventListener("keydown", function(inEvent){
-  var message = "<h1>" + "Keycode is" + inEvent.keyCode + "</h1>"+ "</br>";
-  document.getElementById("results").innerHTML = message;
+  // var message = "<h1>" + "Keycode is" + inEvent.keyCode + "</h1>"+ "</br>";
+  // document.getElementById("results").innerHTML = message;
   if (inEvent.keyCode == 40) { 
     window.scrollBy({ 
-      top: 200, // negative value acceptable
+      top: 500, // negative value acceptable
       left: 0, 
       behavior: 'smooth' 
     });
   }
   if (inEvent.keyCode == 38) { 
     window.scrollBy({ 
-      top: -200, // negative value acceptable
+      top: -300, // negative value acceptable
       left: 0, 
       behavior: 'smooth' 
     });
   }
 });
+
+// tagsEl.firstElementChild.focus();
+// window.addEventListener('keydown', onKeyDown)
+// // Event callback
+// function onKeyDown(e){
+//   e.preventDefault()
+  
+//   var selectedElm = document.activeElement,
+//       goToStart,
+//       // map actions to event's key
+//       action = {ArrowUp:"previous", Up:"previous", ArrowDown:"next", Down:"next"}
+
+//   selectedElm = selectedElm[action[e.key] + "ElementSibling"];
+
+//   // loop if top/bottom edges reached or "home"/"end" keys clicked
+//   if( !selectedElm || e.key == 'Home' || e.key == 'End' ){
+//     goToStart = action[e.key] == "next" || e.key == 'Home'
+//     selectedElm = tagsEl.children[goToStart ? 0 : tagsEl.children.length - 1]
+//   }
+  
+//   selectedElm.focus()
+// }
