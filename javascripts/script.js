@@ -218,11 +218,12 @@ function showMovies(data) {
                 <h3>Overview</h3>
                 ${overview}
                 <br/> 
-                <button class="know-more" id="${id}">Know More</button
+                <button class="know-more" >Watchlist</button>
+                <button class="know-more" >Watched</button>
+                <button class="know-more" id="${id}">Know More</button>
             </div>
         
         `
-
         main.appendChild(movieEl);
 
         document.getElementById(id).addEventListener('click', () => {

@@ -20,6 +20,7 @@ header{
     display:flex;
     justify-content: flex-end;
     background-color: var(--secondary-color);
+    /* background-color: #24030f; */
 }
 
 .search{
@@ -155,7 +156,7 @@ main{
     border-radius: 30%;
     height: 60px;
     float: left;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 .tags:hover{
     border-color: orange;
@@ -193,6 +194,18 @@ main{
     border: 5px solid orange;
     font-size: 2rem;
     font-weight: 600;
+}
+
+.watch{
+    background-color: var(--secondary-color);
+    color:white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin-top: 5px;
+    margin-right: 20px;
 }
 
 .know-more{

@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/style.css">
 	<title>Chillax</title>
-	<link rel="icon" href="Assets/Chillax.png">
+	<link rel="icon" href="Assets/logo.png">
 </head>
 
 <script src="webOSTVjs-1.2.4/webOSTV.js" charset="utf-8"></script>
@@ -26,8 +26,10 @@
 
  <body>
 	<header>
-        <img class="Mainlogo" src="Assets/Chillax.png"/>
+        <a href="index.html"><img class="Mainlogo" src="Assets/logo.png"/></a>
         <form  id="form">
+            <a href="watched.html"><button type="button" class="watch">Watched</button></a>
+            <a href="watch_list.html"><button type="button" class="watch">Watch List</button></a>
             <input type="text" placeholder="Search" id="search" class="search">
         </form>
     </header>
@@ -39,7 +41,7 @@
 
         <!-- Button to close the overlay navigation -->
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      
+        
         <!-- Overlay content -->
         <div class="overlay-content" id="overlay-content"></div>
         
