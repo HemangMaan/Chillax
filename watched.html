@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/db8.css">
+    <script type="text/javascript" charset="utf-8" src="javascripts/db8.js"></script>
+    <script type="text/javascript">
+		window.addEventListener("load", function () { initPage() }, false);
+	</script>
 	<title>Chillax</title>
 	<link rel="icon" href="Assets/Chillax.png">
 </head>
@@ -20,5 +25,40 @@
             <input type="text" placeholder="Search" id="search" class="search">
         </form>
     </header>
+    
+    <!-- DataBase test -->
+
+    <div id="container">
+		<div class="control">
+			<p>
+				<button id="putKind">putKind</button>
+				<button id="delKind">delKind</button>
+				<button id="putPermissions">putPermissions</button>
+			</p>
+			<p>
+				<button id="put">put</button>
+				<button id="del">del</button>
+				<!-- <button id="merge">merge</button> -->
+			</p>
+			<p>
+				<button id="find0">All</button>
+				<button id="find1">watchlist</button>
+				<button id="find2">watched</button>
+			</p>
+			<div id="log"></div>
+		</div>
+		<div id="db"></div>
+	</div>
+
+    <!-- DataBase test -->
+
+    <main id="watched"></main>
+    
+    <!-- <div class="pagination">
+        <div class="page" id="prev">Previous Page</div>
+        <div class="current" id="current">1</div>
+        <div class="page" id="next">Next Page</div>
+    </div> -->
+    <script type="text/javascript" charset="utf-8" src="javascripts/watched_movie.js"></script>
 </body>
 </html>

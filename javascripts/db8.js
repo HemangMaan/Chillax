@@ -1,160 +1,282 @@
-function onPutKind() {
-	var request = webOS.service.request("luna://com.webos.service.db", {
+var appId = "com.chillaxwebos.app";
+var kindId = appId + ":1";
+var callerId = "com.chillaxwebos.app.*";
+
+function printLog(content) {
+    document.querySelector("#log").innerHTML += content + "<br>";
+}
+function clearLog() {
+    document.querySelector("#log").innerHTML = "";
+}
+function printDB(content) {
+    document.querySelector("#db").innerHTML = content;
+}
+
+function initPage() {
+    refreshDB();
+
+    document.querySelector("#putKind").addEventListener("click", function () {
+        clearLog();
+        putKind();
+        refreshDB();
+    });
+    document.querySelector("#delKind").addEventListener("click", function () {
+        clearLog();
+        delKind();
+        refreshDB();
+    });
+    document.querySelector("#putPermissions").addEventListener("click", function () {
+        clearLog();
+        putPermissions();
+        refreshDB();
+    });
+
+    document.querySelector("#put").addEventListener("click", function () {
+        clearLog();
+        put(1, true, true);
+        put(2, true, false);
+        put(3, false, true);
+        put(4, true, false);
+        put(5, true, true);
+        put(6, false, true);
+        refreshDB();
+    });
+    // document.querySelector("#del").addEventListener("click", function () {
+    //     var delQuery = [
+    //         {"prop":"isUsed", "op":"=", "val":true}
+    //     ];
+    //     clearLog();
+    //     del(delQuery);
+    //     refreshDB();
+    // });
+    
+    var findQuery = [
+        [
+            {"prop":"number", "op":">", "val":0}
+        ],
+        [
+            {"prop":"watchlist", "op":"=", "val":true}
+        ],
+        [
+            {"prop":"watched", "op":"=", "val":true}
+        ]
+    ];
+    document.querySelector("#find0").addEventListener("click", function () {
+        clearLog();
+        find(findQuery[0]);
+    });
+    document.querySelector("#find1").addEventListener("click", function () {
+        clearLog();
+        find(findQuery[1]);
+    });
+    document.querySelector("#find2").addEventListener("click", function () {
+        clearLog();
+        find(findQuery[2]);
+    });
+}
+
+function putKind() {
+	webOS.service.request("luna://com.webos.service.db", {
 		method: "putKind",
 		parameters: {
-			"id":"com.chillaxwebos.app:1",
-			"owner":"com.chillaxwebos.app",
-			"schema":{
-				"properties":{
-					"prop_name1":{
-						"type":"string",
-						"optional":true,
-						"description":"foo string"
-					},
-					"prop_name2":{
-						"type":"string",
-						"description":"bar string"
-					}
-				},
-				"indexes":[{
-					"name":"index_name1",
-					"props":[{"name":"prop_name1"},{"name":"prop_name2"}]
-				},{
-					"name":"index_name2",
-					"props":[{"name":"prop_name2"}]
-				}]
-			}
+			id: kindId,
+			owner: appId,
+            schema: {
+                id: kindId, 
+                type: "object", 
+                properties : {
+                    "_kind" : {
+                        "type": "string",
+                        "value": kindId
+                    }, 
+                    "number": {
+                        "type": "integer",
+                        "description": "movie id"
+                    }, 
+                    "watched": {
+                        "type": "boolean", 
+                        "description": "movie is in watched"
+                    },
+                    "watchlist": {
+                        "type": "boolean", 
+                        "description" : "movie is in watchlist"
+                    }
+                }
+            },
+			indexes: [
+				{ 
+					"name": "index0",
+					"props": [
+                        {"name": "number"}
+                    ]
+                },
+                {
+                    "name": "index1",
+                    "props": [
+                        {"name": "watched"}
+                    ]
+                },
+                {
+                    "name": "index2",
+                    "props": [
+                        {"name": "watchlist"}
+                    ]
+                }
+			]
 		},
-		onComplete: getPutKindResponse
-	});
-
-	request.send();
-}
-
-function getPutKindResponse(inResponse) {
-	var success = inResponse.returnValue;
-	if (!success){
-		document.getElementById('testResultPutKind').innerText = "Failed to putKind";
-		return true;
-	}
-	
-	document.getElementById('testResultPutKind').innerText = "excuted putKind";
-	return true;
-}
-
-function onPut() {
-
-	var request = webOS.service.request("luna://com.webos.service.db", {
-		method: "put",
-		parameters: {
-			"objects":[{
-				"_kind":"com.chillaxwebos.app:1",
-				"prop_name1":"foo1",
-				"prop_name2":"bar1"
-			},{
-				"_kind":"com.chillaxwebos.app:1",
-				"prop_name1":"foo2",
-				"prop_name2":"bar2"
-			},{
-				"_kind":"com.chillaxwebos.app:1",
-				"prop_name1":"foo3",
-				"prop_name2":"bar3"
-			},{
-				"_kind":"com.chillaxwebos.app:1",
-				"prop_name1":"foo4",
-				"prop_name2":"bar4"
-			}]
+		onSuccess: function (res) {
+            printLog("[putKind] onSuccess");
 		},
-		onComplete: getPutResponse
+		onFailure: function (res) {
+            printLog("[putKind] onFailure");
+            printLog("(" + res.errorCode + ") " + res.errorText);
+            console.log("[putKind] onFailure", res);
+			return;
+		}
 	});
-
-	request.send();
 }
 
-function getPutResponse(inResponse) {
-	var success = inResponse.returnValue;
-	if (!success){
-		document.getElementById('testResultPut').innerText = "Failed to put items";
-		document.getElementById('idOfItems').innerHTML = "can't access to Kind";
-		return true;
-	}
-	
-	document.getElementById('testResultPut').innerText = "excuted put Items";
-	var str = "<table>";
-	for(i in inResponse.results){
-		str += "<tr>";
-		str += "<td>";
-		str += inResponse.results[i].id;;
-		str += "</td>";
-		str += "</tr>"
-	}
-	str +="</table>";
-	document.getElementById('idOfItems').innerHTML = str;
-
-	return true;
-}
-
-function onFind() {
-
-	var request = webOS.service.request("luna://com.webos.service.db", {
-		method: "find",
-		parameters: {
-			"query":{
-				"from":"com.chillaxwebos.app:1"
-			}
-		},
-		onComplete: getFindResponse
-	});
-
-	request.send();
-}
-
-function getFindResponse(inResponse) {
-	var success = inResponse.returnValue;
-	if (!success){
-		document.getElementById('testResultFind').innerText = "Failed to Find items";
-		document.getElementById('itemPanel').innerHTML = "can't access to Kind";
-		return true;
-	}
-	
-	document.getElementById('testResultFind').innerText = "excuted Find Items";
-	var str = "";
-	str = "<table>";
-	for (var i=0; i < 4; i++){
-		str += "<tr>";
-		str += "<td>";
-		str += inResponse.results[i].prop_name1;
-		str += "</td>";
-		str += "<td>";
-		str += inResponse.results[i].prop_name2;
-		str += "</td>";
-		str += "</tr>";
-	}
-	str +="</table>";
-	document.getElementById('itemPanel').innerHTML = str;
-		
-	return true;
-}
-
-function onDelKind() {
-
-	var request = webOS.service.request("luna://com.webos.service.db", {
+function delKind() {
+	webOS.service.request("luna://com.webos.service.db", {
 		method: "delKind",
-		parameters: {
-			"id" : "com.chillaxwebos.app:1"
+		parameters: { 
+			id: kindId
 		},
-		onComplete: getDelKindResponse
+		onSuccess: function (res) {
+			printLog("[delKind] onSuccess");
+		},
+		onFailure: function (res) {
+            printLog("[delKind] onFailure");
+            printLog("(" + res.errorCode + ") " + res.errorText);
+			return;
+		}
 	});
-
-	request.send();
 }
 
-function getDelKindResponse(inResponse) {
-	var success = inResponse.returnValue;
-	if (!success){
-		document.getElementById('testResultDelKind').innerText = "Failed to delKind";
-		return true;
-	}
-	document.getElementById('testResultDelKind').innerText = "excuted delKind";
-	return true;
+function putPermissions() {
+	webOS.service.request("luna://com.webos.service.db", {
+		method: "putPermissions",
+		parameters: { 
+			"permissions": [
+				{
+					"operations": {
+						"read": "allow",
+						"create": "allow",
+						"update": "allow",
+						"delete": "allow"
+					},
+					"object": kindId,
+					"type": "db.kind",
+					"caller": callerId
+				}
+			]
+		},
+		onSuccess: function (res) {
+			printLog("[putPermissions] onSuccess");
+		},
+		onFailure: function (res) {
+            printLog("[putPermissions] onFailure");
+            printLog("(" + res.errorCode + ") " + res.errorText);
+			return;
+		}
+	});
+}
+
+function put(number, watched, watchlist) {
+    webOS.service.request("luna://com.webos.service.db", {
+        method: "put",
+        parameters: { 
+            "objects":[
+                {
+                    "_kind": kindId,
+                    "number": number,
+                    "watched": watched,
+                    "watchlist": watchlist
+                }
+            ]
+        },
+        onSuccess: function (res) {
+            printLog("[put] onSuccess: " + number + ", " + watched + ", " + watchlist);
+        },
+        onFailure: function (res) {
+            printLog("[put] onFailure: " + number + ", " + watched + ", " + watchlist);
+            printLog("(" + res.errorCode + ") " + res.errorText);
+            return;
+        }
+    });
+}
+
+// function del(query) {
+//     webOS.service.request("luna://com.webos.service.db", {
+//         method: "del",
+//         parameters: {
+//             "query" : { 
+//                 "from" : kindId,
+//                 "where": query
+//             }
+//         },
+//         onSuccess: function (res) {
+//             printLog("[del] onSuccess: deleted " + res.count + " object(s).");
+//         },
+//         onFailure: function (res) {
+//             printLog("[del] onFailure");
+//             printLog("(" + res.errorCode + ") " + res.errorText);
+//             return;
+//         }
+//     });
+// }
+
+function find(query) {
+    webOS.service.request("luna://com.webos.service.db", {
+        method: "find",
+        parameters: { 
+            "query": {
+                "from": kindId,
+                "where": query,
+                "limit": 10
+            }
+        },
+        onSuccess: function (res) {
+            var result = res.results;
+            printLog("[find] onSuccess: found " + result.length + " object(s).");
+            printLog("number / watched / watchlist / _id / _rev");
+            for (var i in result) {
+                printLog(result[i].number + " / " + result[i].watched + " / " + result[i].watchlist + " / " + result[i]._id + " / " + result[i]._rev);
+            }
+            console.log("[find] onSuccess:", result);
+        },
+        onFailure: function (res) {
+            printLog("[find] onFailure");
+            printLog("(" + res.errorCode + ") " + res.errorText);
+            return;
+        }
+    });
+}
+
+function refreshDB() {
+    webOS.service.request("luna://com.webos.service.db", {
+        method: "find",
+        parameters: { 
+            "query": {
+                "from": kindId,
+                "where": [
+                    {"prop":"number", "op":">", "val":0}
+                ]
+            }
+        },
+        onSuccess: function (res) {
+            var result = res.results;
+            var content = "[DB Total: " + result.length + "] number / watched / watchlist / _id / _rev<br>"
+            for (var i in result) {
+                content +=result[i].number + " / " + result[i].watched + " / " + result[i].watchlist + " / " + result[i]._id +  " / " + result[i]._rev + "<br>";
+            }
+            printDB(content);
+            console.log("[refreshDB] onSuccess:", result);
+        },
+        onFailure: function (res) {
+            printDB("[refreshDB] onFailure");
+            printDB("(" + res.errorCode + ") " + res.errorText);
+            return;
+        }
+    });
 }

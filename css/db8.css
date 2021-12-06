@@ -1,27 +1,30 @@
-/* body {
-    width: 100%; 
-    height: 100%;
-    margin: 100px;
-    background-color: #202020;
-}  */
-
-h1 {
-    color: #FFFFFF;
+* {
+    font-size: 20px;
+    color: red;
+}
+.control {
+    margin-left: 30px;
+    float: left;
 }
 
-#itemPanel {
-    font-size: 24px;
-    color: #FFFFFF;
+#log {
+    overflow: auto;
+    width: 550px;
+    height: 390px;
+    margin-top: 30px;
+    border: 1px solid black;
+    padding: 10px;
+    line-height: 150%;
 }
 
-#idOfItems {
-    font-size: 24px;
-    color: #FFFFFF;
-}
-
-button {
-
-    vertical-align: middle;
-    font-size: 24px;
-    color: black;
-}
+#db {
+    float: right;
+    overflow: auto;
+    width: 550px;
+    height: 560px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 20px 30px 0 0;
+    text-align: left;
+    line-height: 150%;
+}   

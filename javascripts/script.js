@@ -200,7 +200,6 @@ function getMovies(url) {
 
 }
 
-
 function showMovies(data) {
     main.innerHTML = '';
 
@@ -218,8 +217,8 @@ function showMovies(data) {
                 <h3>Overview</h3>
                 ${overview}
                 <br/> 
-                <button class="know-more" >Watchlist</button>
-                <button class="know-more" >Watched</button>
+                <button class="know-more" onclick="put(${id},false,true)">Watchlist</button>
+                <button class="know-more" onclick="put(${id},true,false)" >Watched</button>
                 <button class="know-more" id="${id}">Know More</button>
             </div>
         
@@ -406,24 +405,3 @@ document.addEventListener("keydown", function(inEvent){
   }
 });
 
-// tagsEl.firstElementChild.focus();
-// window.addEventListener('keydown', onKeyDown)
-// // Event callback
-// function onKeyDown(e){
-//   e.preventDefault()
-  
-//   var selectedElm = document.activeElement,
-//       goToStart,
-//       // map actions to event's key
-//       action = {ArrowUp:"previous", Up:"previous", ArrowDown:"next", Down:"next"}
-
-//   selectedElm = selectedElm[action[e.key] + "ElementSibling"];
-
-//   // loop if top/bottom edges reached or "home"/"end" keys clicked
-//   if( !selectedElm || e.key == 'Home' || e.key == 'End' ){
-//     goToStart = action[e.key] == "next" || e.key == 'Home'
-//     selectedElm = tagsEl.children[goToStart ? 0 : tagsEl.children.length - 1]
-//   }
-  
-//   selectedElm.focus()
-// }
