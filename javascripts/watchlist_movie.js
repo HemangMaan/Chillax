@@ -19,29 +19,6 @@ var findQuery = [
 // getMovies('https://api.themoviedb.org/3/movie/580489?api_key=7f5719644de5f05dfc066ec0484d202c&language=en-US');
 find(findQuery[0]);
 
-function find(query) {
-    webOS.service.request("luna://com.webos.service.db", {
-        method: "find",
-        parameters: { 
-            "query": {
-                "from": kindId,
-                "where": query,
-            }
-        },
-        onSuccess: function (res) {
-            var result = res.results;
-            for (var i in result) {
-                getMovies('https://api.themoviedb.org/3/movie/'+ result[i].number +'?api_key=7f5719644de5f05dfc066ec0484d202c&language=en-US');
-            }
-            console.log("[find] onSuccess:", result);
-        },
-        onFailure: function (res) {
-            return;
-        }
-    });
-}
-
-
 function getMovies(url) {
   lastUrl = url;
     fetch(url).then(res => res.json()).then(data => {
@@ -65,9 +42,7 @@ function showMovies(data) {
                 <h3>Overview</h3>
                 ${overview}
                 <br/> 
-                <button class="know-more" >Watchlist</button>
-                <button class="know-more" >Watched</button>
-                <button class="know-more" id="${id}">Know More</button>
+                <button class="know-more" id="${id}" >Add to Watched</button>
             </div>
         
         `
@@ -75,7 +50,10 @@ function showMovies(data) {
 
         document.getElementById(id).addEventListener('click', () => {
           console.log(id)
-          openNav(movie)
+          del(id);
+          put(id,true,false);
+          main.innerHTML = '';
+          find(findQuery[0]);
         })
 }
 
@@ -88,20 +66,3 @@ function getColor(vote) {
         return 'red'
     }
 }
-
-document.addEventListener("keydown", function(inEvent){
-    if (inEvent.keyCode == 40) { 
-      window.scrollBy({ 
-        top: 500, // negative value acceptable
-        left: 0, 
-        behavior: 'smooth' 
-      });
-    }
-    if (inEvent.keyCode == 38) { 
-      window.scrollBy({ 
-        top: -300, // negative value acceptable
-        left: 0, 
-        behavior: 'smooth' 
-      });
-    }
-  });

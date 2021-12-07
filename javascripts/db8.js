@@ -2,77 +2,30 @@ var appId = "com.chillaxwebos.app";
 var kindId = appId + ":1";
 var callerId = "com.chillaxwebos.app.*";
 
-function printLog(content) {
-    document.querySelector("#log").innerHTML += content + "<br>";
-}
-function clearLog() {
-    document.querySelector("#log").innerHTML = "";
-}
-function printDB(content) {
-    document.querySelector("#db").innerHTML = content;
-}
+// function printLog(content) {
+//     document.querySelector("#log").innerHTML += content + "<br>";
+// }
+// function clearLog() {
+//     document.querySelector("#log").innerHTML = "";
+// }
+// function printDB(content) {
+//     document.querySelector("#db").innerHTML = content;
+// }
 
 function initPage() {
-    refreshDB();
+    putKind();
+    // refreshDB();
 
-    document.querySelector("#putKind").addEventListener("click", function () {
-        clearLog();
-        putKind();
-        refreshDB();
-    });
-    document.querySelector("#delKind").addEventListener("click", function () {
-        clearLog();
-        delKind();
-        refreshDB();
-    });
-    document.querySelector("#putPermissions").addEventListener("click", function () {
-        clearLog();
-        putPermissions();
-        refreshDB();
-    });
-
-    document.querySelector("#put").addEventListener("click", function () {
-        clearLog();
-        put(1, true, true);
-        put(2, true, false);
-        put(3, false, true);
-        put(4, true, false);
-        put(5, true, true);
-        put(6, false, true);
-        refreshDB();
-    });
-    // document.querySelector("#del").addEventListener("click", function () {
-    //     var delQuery = [
-    //         {"prop":"isUsed", "op":"=", "val":true}
-    //     ];
+    // document.querySelector("#putKind").addEventListener("click", function () {
     //     clearLog();
-    //     del(delQuery);
+    //     putKind();
     //     refreshDB();
     // });
-    
-    var findQuery = [
-        [
-            {"prop":"number", "op":">", "val":0}
-        ],
-        [
-            {"prop":"watchlist", "op":"=", "val":true}
-        ],
-        [
-            {"prop":"watched", "op":"=", "val":true}
-        ]
-    ];
-    document.querySelector("#find0").addEventListener("click", function () {
-        clearLog();
-        find(findQuery[0]);
-    });
-    document.querySelector("#find1").addEventListener("click", function () {
-        clearLog();
-        find(findQuery[1]);
-    });
-    document.querySelector("#find2").addEventListener("click", function () {
-        clearLog();
-        find(findQuery[2]);
-    });
+    // document.querySelector("#delKind").addEventListener("click", function () {
+    //     clearLog();
+    //     delKind();
+    //     refreshDB();
+    // });
 }
 
 function putKind() {
@@ -125,11 +78,11 @@ function putKind() {
 			]
 		},
 		onSuccess: function (res) {
-            printLog("[putKind] onSuccess");
+            // printLog("[putKind] onSuccess");
 		},
 		onFailure: function (res) {
-            printLog("[putKind] onFailure");
-            printLog("(" + res.errorCode + ") " + res.errorText);
+            // printLog("[putKind] onFailure");
+            // printLog("(" + res.errorCode + ") " + res.errorText);
             console.log("[putKind] onFailure", res);
 			return;
 		}
@@ -143,44 +96,16 @@ function delKind() {
 			id: kindId
 		},
 		onSuccess: function (res) {
-			printLog("[delKind] onSuccess");
+			// printLog("[delKind] onSuccess");
 		},
 		onFailure: function (res) {
-            printLog("[delKind] onFailure");
-            printLog("(" + res.errorCode + ") " + res.errorText);
+            // printLog("[delKind] onFailure");
+            // printLog("(" + res.errorCode + ") " + res.errorText);
 			return;
 		}
 	});
 }
 
-function putPermissions() {
-	webOS.service.request("luna://com.webos.service.db", {
-		method: "putPermissions",
-		parameters: { 
-			"permissions": [
-				{
-					"operations": {
-						"read": "allow",
-						"create": "allow",
-						"update": "allow",
-						"delete": "allow"
-					},
-					"object": kindId,
-					"type": "db.kind",
-					"caller": callerId
-				}
-			]
-		},
-		onSuccess: function (res) {
-			printLog("[putPermissions] onSuccess");
-		},
-		onFailure: function (res) {
-            printLog("[putPermissions] onFailure");
-            printLog("(" + res.errorCode + ") " + res.errorText);
-			return;
-		}
-	});
-}
 
 function put(number, watched, watchlist) {
     webOS.service.request("luna://com.webos.service.db", {
@@ -196,35 +121,40 @@ function put(number, watched, watchlist) {
             ]
         },
         onSuccess: function (res) {
-            printLog("[put] onSuccess: " + number + ", " + watched + ", " + watchlist);
+            // printLog("[put] onSuccess: " + number + ", " + watched + ", " + watchlist);
         },
         onFailure: function (res) {
-            printLog("[put] onFailure: " + number + ", " + watched + ", " + watchlist);
-            printLog("(" + res.errorCode + ") " + res.errorText);
+            // printLog("[put] onFailure: " + number + ", " + watched + ", " + watchlist);
+            // printLog("(" + res.errorCode + ") " + res.errorText);
             return;
         }
     });
 }
 
-// function del(query) {
-//     webOS.service.request("luna://com.webos.service.db", {
-//         method: "del",
-//         parameters: {
-//             "query" : { 
-//                 "from" : kindId,
-//                 "where": query
-//             }
-//         },
-//         onSuccess: function (res) {
-//             printLog("[del] onSuccess: deleted " + res.count + " object(s).");
-//         },
-//         onFailure: function (res) {
-//             printLog("[del] onFailure");
-//             printLog("(" + res.errorCode + ") " + res.errorText);
-//             return;
-//         }
-//     });
-// }
+function del(id) {
+    var findQuery = [
+        [
+            {"prop":"number", "op":"=", "val":id}
+        ]
+    ];
+    webOS.service.request("luna://com.webos.service.db", {
+        method: "del",
+        parameters: {
+            "query" : { 
+                "from" : kindId,
+                "where": findQuery[0]
+            }
+        },
+        onSuccess: function (res) {
+            // printLog("[del] onSuccess: deleted " + res.count + " object(s).");
+        },
+        onFailure: function (res) {
+            // printLog("[del] onFailure");
+            // printLog("(" + res.errorCode + ") " + res.errorText);
+            return;
+        }
+    });
+}
 
 function find(query) {
     webOS.service.request("luna://com.webos.service.db", {
@@ -233,50 +163,50 @@ function find(query) {
             "query": {
                 "from": kindId,
                 "where": query,
-                "limit": 10
             }
         },
         onSuccess: function (res) {
             var result = res.results;
-            printLog("[find] onSuccess: found " + result.length + " object(s).");
-            printLog("number / watched / watchlist / _id / _rev");
+            // printLog("[find] onSuccess: found " + result.length + " object(s).");
+            // printLog("number / watched / watchlist / _id / _rev");
             for (var i in result) {
-                printLog(result[i].number + " / " + result[i].watched + " / " + result[i].watchlist + " / " + result[i]._id + " / " + result[i]._rev);
+                // printLog(result[i].number + " / " + result[i].watched + " / " + result[i].watchlist + " / " + result[i]._id + " / " + result[i]._rev);
+                getMovies('https://api.themoviedb.org/3/movie/'+ result[i].number +'?api_key=7f5719644de5f05dfc066ec0484d202c&language=en-US');
             }
             console.log("[find] onSuccess:", result);
         },
         onFailure: function (res) {
-            printLog("[find] onFailure");
-            printLog("(" + res.errorCode + ") " + res.errorText);
+            // printLog("[find] onFailure");
+            // printLog("(" + res.errorCode + ") " + res.errorText);
             return;
         }
     });
 }
 
-function refreshDB() {
-    webOS.service.request("luna://com.webos.service.db", {
-        method: "find",
-        parameters: { 
-            "query": {
-                "from": kindId,
-                "where": [
-                    {"prop":"number", "op":">", "val":0}
-                ]
-            }
-        },
-        onSuccess: function (res) {
-            var result = res.results;
-            var content = "[DB Total: " + result.length + "] number / watched / watchlist / _id / _rev<br>"
-            for (var i in result) {
-                content +=result[i].number + " / " + result[i].watched + " / " + result[i].watchlist + " / " + result[i]._id +  " / " + result[i]._rev + "<br>";
-            }
-            printDB(content);
-            console.log("[refreshDB] onSuccess:", result);
-        },
-        onFailure: function (res) {
-            printDB("[refreshDB] onFailure");
-            printDB("(" + res.errorCode + ") " + res.errorText);
-            return;
-        }
-    });
-}
+// function refreshDB() {
+//     webOS.service.request("luna://com.webos.service.db", {
+//         method: "find",
+//         parameters: { 
+//             "query": {
+//                 "from": kindId,
+//                 "where": [
+//                     {"prop":"number", "op":">", "val":0}
+//                 ]
+//             }
+//         },
+//         onSuccess: function (res) {
+//             var result = res.results;
+//             var content = "[DB Total: " + result.length + "] number / watched / watchlist / _id / _rev<br>"
+//             for (var i in result) {
+//                 content +=result[i].number + " / " + result[i].watched + " / " + result[i].watchlist + " / " + result[i]._id +  " / " + result[i]._rev + "<br>";
+//             }
+//             printDB(content);
+//             console.log("[refreshDB] onSuccess:", result);
+//         },
+//         onFailure: function (res) {
+//             printDB("[refreshDB] onFailure");
+//             printDB("(" + res.errorCode + ") " + res.errorText);
+//             return;
+//         }
+//     });
+// }
