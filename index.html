@@ -16,16 +16,31 @@
 
 </head>
 
+<script src="https://luke-chang.github.io/js-spatial-navigation/spatial_navigation.js"></script>
+<script src="javascripts/eventListeners.js"></script>
+<script>
+    window.addEventListener('load', function() {
+      SpatialNavigation.init();
+      SpatialNavigation.add({
+        selector: '.item'
+      });
+      SpatialNavigation.makeFocusable();
+      
+      addEventListeners();
+    });
+  </script>
+
+
 <script src="webOSTVjs-1.2.4/webOSTV.js" charset="utf-8"></script>
 <script src="webOSTVjs-1.2.4/webOSTV-dev.js" charset="utf-8"></script>
 
  <body>
 	<header>
-        <a href="index.html"><img class="Mainlogo" src="Assets/logo.png"/></a>
+        <a class="item" tabindex="0" href="index.html"><img class="Mainlogo" src="Assets/logo.png"/></a>
         <form  id="form">
-            <a href="watched.html"><button type="button" class="watch">Watched</button></a>
-            <a href="watch_list.html"><button type="button" class="watch">Watch List</button></a>
-            <input type="text" placeholder="Search" id="search" class="search">
+            <a href="watched.html"><button type="button" class="watch item" tabindex="0" >Watched</button></a>
+            <a href="watch_list.html"><button type="button" class="watch item" tabindex="0">Watch List</button></a>
+            <input type="text" placeholder="Search" id="search" class="search item" tabindex="0">
         </form>
     </header>
     

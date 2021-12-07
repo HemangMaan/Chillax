@@ -321,3 +321,35 @@ main{
 .dots .dot.active{
     border-color: orange;
 }
+
+.item {
+    background-color: var(--secondary-color) ;
+    color: #ffffff;
+}
+
+.item:focus{
+    background-color: #cf0652;
+    color: white;
+    border: 2px solid white;
+}
+.clicked {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    font-size: 35px;
+}
+
+::-webkit-scrollbar {
+  width: 25px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cf0652; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ac0645; 
+}
