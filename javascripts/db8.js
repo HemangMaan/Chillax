@@ -183,6 +183,10 @@ function find(query) {
     });
 }
 
+function RefreshDB(){
+    delKind();
+}
+
 // function refreshDB() {
 //     webOS.service.request("luna://com.webos.service.db", {
 //         method: "find",
